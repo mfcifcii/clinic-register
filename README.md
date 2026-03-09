@@ -1,3 +1,5 @@
+![CI](https://github.com/mfcifcii/clinic-register/actions/workflows/ci.yml/badge.svg)
+
 # Clinic Register — QA Portfolio (Manual + Automation)
 
 A simple Spring Boot + Thymeleaf patient registration demo built for **QA portfolio** purposes.
@@ -36,5 +38,5 @@ Windows (PowerShell):
 See: `docs/test-cases.md`
 
 ## CI (GitHub Actions)
-A workflow can be added to run tests on every push / PR.
+Tests run automatically on every push and pull request using GitHub Actions.  
 See: `.github/workflows/ci.yml`
