@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="tr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Beyza Diş Kliniği - Hasta Kayıt</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root{
+          --khaki: #7a7a49;
+          --khaki-soft: #eef0e6;
+          --ink: #1f2328;
+        }
+        body{ background: #f6f7f4; color: var(--ink); }
+        .brand-dot{ color: var(--khaki); }
+        .khaki-btn{
+          background: var(--khaki);
+          border-color: var(--khaki);
+          color: #fff;
+        }
+        .khaki-btn:hover{
+          filter: brightness(0.95);
+          color: #fff;
+        }
+        .khaki-focus:focus{
+          border-color: var(--khaki) !important;
+          box-shadow: 0 0 0 .2rem rgba(122,122,73,.15) !important;
+        }
+        .top-accent{
+          height: 4px;
+          background: linear-gradient(90deg, var(--khaki), #a4a46a, var(--khaki));
+        }
+        .card-soft{
+          border: 1px solid rgba(0,0,0,.06);
+          border-radius: 16px;
+        }
+        .badge-soft{
+          background: var(--khaki-soft);
+          color: var(--khaki);
+          border: 1px solid rgba(122,122,73,.25);
+        }
+        .logo{
+          width: 34px; height: 34px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 12px;
+          background: var(--khaki-soft);
+          border: 1px solid rgba(122,122,73,.25);
+        }
+        .form-control.kf{ border-radius: 12px; }
+        .shadow-lite{ box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+    </style>
+</head>
+
+<body>
+<div class="top-accent"></div>
+
+<nav class="navbar bg-white border-bottom">
+    <div class="container py-2">
+        <div class="d-flex align-items-center gap-3">
+            <div class="logo" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M7.5 4.8c1.2-1 2.7-1.6 4.5-1.6s3.3.6 4.5 1.6c1.7 1.4 2.4 3.6 1.9 5.8-.5 2.1-1.4 4-2  6.1-.4 1.4-.6 2.7-1.9 2.7-1 0-1.2-1.1-1.4-2.2-.2-1.2-.4-2.4-1.1-2.4s-.9 1.2-1.1 2.4c-.2 1.1-.4 2.2-1.4 2.2-1.3 0-1.5-1.3-1.9-2.7-.6-2.1-1.5-4-2-6.1-.5-2.2.2-4.4 1.9-5.8Z"
+                          stroke="rgba(122,122,73,.95)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <div>
+                <div class="fw-bold fs-5">
+                    Beyza <span class="brand-dot">Diş Kliniği</span>
+                </div>
+                <div class="text-muted small">Hasta Kayıt Sistemi</div>
+            </div>
+        </div>
+
+        <span class="badge badge-soft rounded-pill px-3 py-2">Demo • Veritabanı Yok</span>
+    </div>
+</nav>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-6">
+
+            <div class="card card-soft shadow-lite">
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="mb-4">
+                        <h2 class="mb-1">Hasta Kayıt</h2>
+                        <p class="text-muted mb-0">Bilgileri girin, kayıt özetini anında görün.</p>
+                    </div>
+
+                    <form th:action="@{/register}" th:object="${patient}" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label">Hasta Adı</label>
+                            <input type="text" class="form-control kf khaki-focus"
+                                   th:field="*{name}" placeholder="Örn: Ayşe">
+                            <div class="text-danger small mt-1"
+                                 th:if="${#fields.hasErrors('name')}"
+                                 th:errors="*{name}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Hasta Soyadı</label>
+                            <input type="text" class="form-control kf khaki-focus"
+                                   th:field="*{surname}" placeholder="Örn: Yılmaz">
+                            <div class="text-danger small mt-1"
+                                 th:if="${#fields.hasErrors('surname')}"
+                                 th:errors="*{surname}"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Telefon</label>
+                            <input type="text" class="form-control kf khaki-focus"
+                                   th:field="*{phoneNumber}" placeholder="05xx xxx xx xx">
+                            <div class="text-danger small mt-1"
+                                 th:if="${#fields.hasErrors('phoneNumber')}"
+                                 th:errors="*{phoneNumber}"></div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control kf khaki-focus"
+                                   th:field="*{email}" placeholder="ornek@mail.com">
+                            <div class="text-danger small mt-1"
+                                 th:if="${#fields.hasErrors('email')}"
+                                 th:errors="*{email}"></div>
+                        </div>
+
+                        <button type="submit" class="btn khaki-btn w-100 py-2 rounded-3">
+                            Kaydı Oluştur
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="text-center mt-4 small text-muted">
+                © <span class="fw-semibold">Beyza Diş Kliniği</span> • Basit Demo
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
